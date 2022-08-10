@@ -1,0 +1,50 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  namespace: spring
+spec:
+  rules:
+  - host: student.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: springapp-srv
+            port: 
+              number: 8989
+      # - pathType: Prefix
+      #   path: /addBook
+      #   backend:
+      #     service:
+      #       name: db-service
+      #       port: 
+      #         number: 8080
+      # - pathType: Prefix
+      #   path: /delete/{id}
+      #   backend:
+      #     service:
+      #       name: db-service
+      #       port: 
+      #         number: 8080
+        
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        

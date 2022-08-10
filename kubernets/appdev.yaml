@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-deplyment
+  namespace: spring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-app
+  template:
+    metadata: 
+      name: myapp-pod 
+      labels:
+        app: spring-app
+    spec:
+      containers:
+      - image: appspring
+        name:  springimage
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8989
+          name: spring-app
+
+

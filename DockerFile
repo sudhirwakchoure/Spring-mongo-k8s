@@ -1,0 +1,6 @@
+FROM openjdk:11
+ADD target/spring.jar  app.jar
+EXPOSE 8989
+CMD ["java", "-jar", "app.jar"]
+
+

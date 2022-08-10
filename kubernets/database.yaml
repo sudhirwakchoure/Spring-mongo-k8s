@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deplyment
+  namespace: spring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-service
+  template:
+    metadata:
+      name: mongodb-pod
+      labels:
+        app: db-service
+    spec:
+      volumes:
+        - name: volume
+          persistentVolumeClaim:
+            claimName: claim
+      containers:
+      - image: mongo:latest
+        name: mongo
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+          - mountPath: /data/db/
+            name: volume
+        # env:
+        #   - name: MONGO_INITDB_ROOT_USERNAME
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: mongosecret 
+        #         key: username
+        #   - name: MONGO_INITDB_ROOT_PASSWORD
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: mongosecret
+        #         key: password
